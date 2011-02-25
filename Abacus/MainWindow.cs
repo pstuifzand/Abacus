@@ -15,6 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 using System;
+using System.IO;
 using System.Collections.Generic;
 using Gtk;
 using Pango;
@@ -30,7 +31,43 @@ public partial class MainWindow: Gtk.Window
 		textview1.ModifyFont(FontDescription.FromString("Sans 14"));
 		textview2.ModifyFont(FontDescription.FromString("Sans 14"));
 		
-		quitAction.Activated  += delegate(object sender, EventArgs e) {
+		openAction.Activated += delegate(object sender, EventArgs e) {
+			FileChooserDialog fc = new FileChooserDialog("Open file",this,FileChooserAction.Open,
+			                                             "Cancel",ResponseType.Cancel,
+			                                             "Open",ResponseType.Accept);
+			fc.Response += delegate(object o, ResponseArgs args) {
+				Gtk.FileChooserDialog dialog = o as FileChooserDialog;
+				if (args.ResponseId == ResponseType.Accept) {
+					string filename = dialog.Filename;
+		            using (TextReader r = new StreamReader(filename)) {
+		                string content  = r.ReadToEnd();
+						textview1.Buffer.Text = content;
+						Recalculate();
+					}
+				}
+				dialog.Destroy();
+			};
+			fc.Run();
+		};
+		saveAsAction.Activated += delegate(object sender, EventArgs e) {
+			FileChooserDialog fc = new FileChooserDialog("Save file",this,FileChooserAction.Save,
+			                                             "Cancel",ResponseType.Cancel,
+			                                             "Save",ResponseType.Accept);
+			fc.Response += delegate(object o, ResponseArgs args) {
+				Gtk.FileChooserDialog dialog = o as FileChooserDialog;
+				if (args.ResponseId == ResponseType.Accept) {
+					string filename = dialog.Filename;
+					
+					using (TextWriter tw = new StreamWriter(filename)) {
+						tw.Write(textview1.Buffer.Text);
+					}
+				}
+				dialog.Destroy();
+			};
+			fc.Run();
+		};
+		
+		quitAction.Activated += delegate(object sender, EventArgs e) {
 			Gtk.Main.Quit();
 		};
 		
@@ -80,7 +117,10 @@ public partial class MainWindow: Gtk.Window
 			Gtk.Main.Quit();
 			break;
 		}
-
+		Recalculate();
+	}
+	
+	public void Recalculate() {
 		LineCalculator calc = new LineCalculator();
 		string [] lines = textview1.Buffer.Text.Split("\n".ToCharArray());
 		ICollection<string> col = calc.CalculateLines(Array.AsReadOnly(lines));

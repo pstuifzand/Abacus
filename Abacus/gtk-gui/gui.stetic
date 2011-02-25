@@ -31,6 +31,18 @@
         <property name="ShortLabel" translatable="yes">Quit</property>
         <property name="StockId">gtk-quit</property>
       </action>
+      <action id="openAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Open...</property>
+        <property name="ShortLabel" translatable="yes">Open...</property>
+        <property name="StockId">gtk-open</property>
+      </action>
+      <action id="saveAsAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Save As...</property>
+        <property name="ShortLabel" translatable="yes">Save As...</property>
+        <property name="StockId">gtk-save-as</property>
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">Abacus</property>
@@ -45,6 +57,8 @@
             <property name="MemberName" />
             <node name="menubar1" type="Menubar">
               <node type="Menu" action="FileAction">
+                <node type="Menuitem" action="openAction" />
+                <node type="Menuitem" action="saveAsAction" />
                 <node type="Menuitem" action="quitAction" />
               </node>
               <node type="Menu" action="HelpAction">
