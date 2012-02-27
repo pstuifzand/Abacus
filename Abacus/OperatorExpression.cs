@@ -1,5 +1,5 @@
 /*  Abacus - a calculator that calculates as you type
-    Copyright (C) 2011  Peter Stuifzand
+    Copyright (C) 2012  Peter Stuifzand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,24 +27,31 @@ namespace Abacus
 		
 		public OperatorExpression(char op, Expression a, Expression b)
 		{
-			this.op=op;
-			this.a=a;
-			this.b=b;
+			this.op = op;
+			this.a = a;
+			this.b = b;
 		}
 		
-		public override double Value() 
+		public override ReturnValue Value(Binding binding)
 		{
+			ReturnValue ra = a.Value(binding);
+			ReturnValue rb = b.Value(binding);
+			
+			if (!ra.Defined() || !rb.Defined()) {
+				return new ReturnValue();
+			}
+			
 			if (op == '+') {
-				return a.Value() + b.Value();
+				return new ReturnValue(ra.Value() + rb.Value());
 			}
 			else if (op == '-') {
-				return a.Value() - b.Value();
+				return new ReturnValue(ra.Value() - rb.Value());
 			}
 			else if (op == '*') {
-				return a.Value() * b.Value();
+				return new ReturnValue(ra.Value() * rb.Value());
 			}
 			else if (op == '/') {
-				return a.Value() / b.Value();
+				return new ReturnValue(ra.Value() / rb.Value());
 			}
 			else {
 				throw new ParserException("Unknown operator: " + op);

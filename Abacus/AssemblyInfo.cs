@@ -1,5 +1,5 @@
 /*  Abacus - a calculator that calculates as you type
-    Copyright (C) 2011  Peter Stuifzand
+    Copyright (C) 2012  Peter Stuifzand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -35,8 +35,3 @@ using System.Runtime.CompilerServices;
 
 [assembly: AssemblyVersion("1.0.*")]
 
-// The following attributes are used to specify the signing key for the assembly, 
-// if desired. See the Mono documentation for more information about signing.
-
-[assembly: AssemblyDelaySign(false)]
-[assembly: AssemblyKeyFile("")]

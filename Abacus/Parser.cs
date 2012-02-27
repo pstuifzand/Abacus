@@ -1,5 +1,5 @@
 /*  Abacus - a calculator that calculates as you type
-    Copyright (C) 2011  Peter Stuifzand
+    Copyright (C) 2012  Peter Stuifzand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,18 +27,45 @@ namespace Abacus
 		
 		public Parser(string s)
 		{
-			text=s;
-			index=0;
+			text = s;
+			index = 0;
 		}
 		
 		public Expression parse() {
 			Expression expr = null;
-			expr = parse_expression();
+			
+			skipws();
+			if (text.Contains("=") && Char.IsLetter(current())) {
+				expr = parse_assignment();
+			}
+			else {
+				expr = parse_expression();
+			}
 			
 			if (current() != '\0') {
-				throw new ParserException("No at end yet");
+				throw new ParserException("Not at end yet");
 			}
 			return expr;
+		}
+		
+		public Expression parse_var() {
+			string name = "";
+			while (Char.IsLetterOrDigit(current())) {
+				name+=current();
+				nextchar();
+			}
+			return new VariableExpression(name);
+		}
+		
+		public Expression parse_assignment() {
+			VariableExpression name = parse_var() as VariableExpression;
+			skipws();
+			if (current() == '=') {
+				match('=');
+				Expression expr = parse_expression();
+				return new AssignmentExpression(name.Name, expr);
+			}
+			return null;
 		}
 		
 		public Expression parse_expression() {
@@ -76,7 +103,12 @@ namespace Abacus
 				match(')');
 				return expr;
 			}
-			return parse_number();
+			if (Char.IsLetter(current())) {
+				return parse_var();
+			}
+			else {
+				return parse_number();
+			}
 		}
 
 		public Expression parse_number() {

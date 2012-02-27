@@ -1,5 +1,5 @@
 /*  Abacus - a calculator that calculates as you type
-    Copyright (C) 2011  Peter Stuifzand
+    Copyright (C) 2012  Peter Stuifzand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,19 +16,22 @@
 */
 using System;
 using Gtk;
+using System.Diagnostics;
 
 namespace Abacus
 {
 	class MainClass
 	{
+
 		public static void Main (string[] args)
 		{
 			Application.Init ();
 			MainWindow win = new MainWindow ();
-  	        win.SetSizeRequest(600, 300);
-            win.WindowPosition = WindowPosition.CenterAlways;
+			win.SetSizeRequest (600, 300);
+			win.WindowPosition = WindowPosition.CenterAlways;
 			win.Show ();
 			Application.Run ();
 		}
+		
 	}
 }

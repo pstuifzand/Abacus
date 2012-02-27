@@ -1,5 +1,5 @@
 /*  Abacus - a calculator that calculates as you type
-    Copyright (C) 2011  Peter Stuifzand
+    Copyright (C) 2012  Peter Stuifzand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 */
 using System;
 using System.IO;
+using System.Diagnostics;
 using System.Collections.Generic;
 using Gtk;
 using Pango;
@@ -73,13 +74,13 @@ public partial class MainWindow: Gtk.Window
 		
 		aboutAction.Activated += delegate(object sender, EventArgs e) {
 			Gtk.AboutDialog d = new Gtk.AboutDialog();
-			d.ProgramName = "Abacus (Build 1010)";
+			d.ProgramName = "Abacus (Build 1012)";
 			d.Authors     = new String[]{"Peter Stuifzand"};
-			d.Copyright   = "Copyright (c) 2011 Peter Stuifzand";
+			d.Copyright   = "Copyright (c) 2012 Peter Stuifzand";
 			d.Website     = "http://stuifzand.eu/abacus/";
-			d.Version     = "0.6.3";
+			d.Version     = "0.6.6";
 			d.License     = "Abacus\n"+
-"    Copyright (C) 2011  Peter Stuifzand\n"+
+"    Copyright (C) 2012  Peter Stuifzand\n"+
 "\n"+
 "    This program is free software: you can redistribute it and/or modify\n"+
 "    it under the terms of the GNU General Public License as published by\n"+
@@ -124,10 +125,13 @@ public partial class MainWindow: Gtk.Window
 		LineCalculator calc = new LineCalculator();
 		string [] lines = textview1.Buffer.Text.Split("\n".ToCharArray());
 		ICollection<string> col = calc.CalculateLines(Array.AsReadOnly(lines));
+		
 		string s = "";
+		
 		foreach (string line in col) {
 			s += line + "\n";
 		}
+		
 		textview2.Buffer.Text = s;
 	}
 }

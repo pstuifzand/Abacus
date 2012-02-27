@@ -1,5 +1,5 @@
 /*  Abacus - a calculator that calculates as you type
-    Copyright (C) 2011  Peter Stuifzand
+    Copyright (C) 2012  Peter Stuifzand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -123,8 +123,11 @@ namespace Abacus
 			TestCalculations(tests);
 		}
 		
+		
+		
 		private void TestCalculations(string[] tests) {
-			Calculator calc = new Calculator();
+			Binding binding = new Binding();
+			Calculator calc = new Calculator(binding);
 			
 			for (int i = 0; i < tests.Length; i += 2) {
 				Expression expr = Expression.parse(tests[i]);

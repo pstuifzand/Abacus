@@ -1,5 +1,5 @@
 /*  Abacus - a calculator that calculates as you type
-    Copyright (C) 2011  Peter Stuifzand
+    Copyright (C) 2012  Peter Stuifzand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -98,5 +98,18 @@ namespace Abacus
 			ICollection<string> expected = Array.AsReadOnly(new string[]{"2", "4", "10", "4+"});
 			Assert.AreEqual(expected, result);
 		}
+		/*
+		[Test()]
+		public void TestVariables() {
+			string[] tests = {
+				"x=1",   "1",
+				"1+x",   "2",
+				"benzine=60", "60",
+				"ritten=8", "8",
+				"kosten=benzine/ritten", "7.5",
+				//"x=1", "x = 1",
+			};
+			TestCalculations(tests);
+		}*/
 	}
 }

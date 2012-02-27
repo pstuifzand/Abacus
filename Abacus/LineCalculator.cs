@@ -1,5 +1,5 @@
 /*  Abacus - a calculator that calculates as you type
-    Copyright (C) 2011  Peter Stuifzand
+    Copyright (C) 2012  Peter Stuifzand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,7 +28,9 @@ namespace Abacus
 		}
 		
 		public ICollection<string> CalculateLines(ICollection<string> lines) {
-			Calculator calc = new Calculator();
+			
+			Binding binding = new Binding();
+			Calculator calc = new Calculator(binding);
 			
 			List<string> list = new List<string>();
 			
@@ -41,8 +43,7 @@ namespace Abacus
 						list.Add(calc.calculate(expr).ToString() + line.Substring(len));
 						break;
 					}
-					catch (ParserException ex) {
-					}
+					catch (ParserException /* unused */) {}
 				}
 				if (len == 0) {
 					list.Add(line);

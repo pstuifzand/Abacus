@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abacus", "Abacus\Abacus.csproj", "{0268F80F-EAD5-49F8-B5B9-EAC03221C272}"
 EndProject
 Project("{9344bdbb-3e7f-41fc-a0dd-8665d75ee146}") = "AbacusTranslation", "AbacusTranslation\AbacusTranslation.mdproj", "{5F67D90D-028E-4115-AE61-3BB57DCDE141}"
@@ -23,7 +23,12 @@ Global
 		{8C8FD139-962D-44FA-BA35-1C4B963E0479}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		description = A new way to calculate mathematical problems.
 		StartupItem = Abacus\Abacus.csproj
+		Policies = $0
+		$0.StandardHeader = $1
+		$1.Text = @ \n ${FileName}\n \n Author:\n      ${AuthorName} <${AuthorEmail}>\n\n Copyright (c) ${Year} ${CopyrightHolder}\n\n This program is free software: you can redistribute it and/or modify\n it under the terms of the GNU General Public License as published by\n the Free Software Foundation, either version 3 of the License, or\n (at your option) any later version.\n\n This program is distributed in the hope that it will be useful,\n but WITHOUT ANY WARRANTY; without even the implied warranty of\n MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n GNU General Public License for more details.\n\n You should have received a copy of the GNU General Public License\n along with this program.  If not, see <http://www.gnu.org/licenses/>.
+		$1.IncludeInNewFiles = True
+		description = A new way to calculate mathematical problems.
+		version = 0.6.4
 	EndGlobalSection
 EndGlobal
