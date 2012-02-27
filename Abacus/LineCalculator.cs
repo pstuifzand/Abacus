@@ -23,17 +23,20 @@ namespace Abacus
 
 	public class LineCalculator
 	{
+		private Binding binding = new Binding();
+
 		public LineCalculator ()
 		{
+			binding.Set("π", new ValueExpression(Math.PI), true);
+			binding.Set("PI", new ValueExpression(Math.PI), true);
+			binding.Set("e", new ValueExpression(Math.E), true);
 		}
-		
+
 		public ICollection<string> CalculateLines(ICollection<string> lines) {
-			
-			Binding binding = new Binding();
 			Calculator calc = new Calculator(binding);
-			
+
 			List<string> list = new List<string>();
-			
+
 			foreach (string line in lines) {
 				int len;
 				for (len = line.Length; len >= 1; len--) {

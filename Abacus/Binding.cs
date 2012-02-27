@@ -21,18 +21,36 @@ namespace Abacus
 	public class Binding
 	{
 		private Dictionary<string, Expression> locals;
-		
+		private Dictionary<string, ReturnValue> cache;
+
+		private ISet<string> consts;
+
 		public Binding ()
 		{
 			locals = new Dictionary<string, Expression>();
+			cache = new Dictionary<string, ReturnValue>();
+
+			consts = new SortedSet<string>();
 		}
-		
-		public void Set(string name, Expression expr) {
-			locals[name] = expr;
+
+		public bool Set(string name, Expression expr, bool is_const = false) {
+			if (!consts.Contains(name)) {
+				locals[name] = expr;
+				if (is_const) {
+					consts.Add(name);
+					return true;
+				}
+				return true;
+			}
+			return false;
 		}
-		
-		public Expression Get(string name) {
-			return locals[name];
+
+		public ReturnValue ValueFor(string name) {
+			if (!cache.ContainsKey(name)) {
+				cache[name] = new ReturnValue();
+				cache[name] = locals[name].Value(this);
+			}
+			return cache[name];
 		}
 	}
 }
