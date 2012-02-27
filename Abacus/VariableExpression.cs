@@ -29,7 +29,7 @@ namespace Abacus
 		
 		public override ReturnValue Value(Binding b) {
 			try {
-				return b.Get(name).Value(b);
+				return b.ValueFor(name);
 			}
 			catch (KeyNotFoundException /* unused */) {
 				return new ReturnValue();

@@ -30,11 +30,15 @@ namespace Abacus
 		
 		public override ReturnValue Value(Binding b) {
 			if (expr != null) {
-				ReturnValue ret = expr.Value(b);
-				b.Set(name, expr);
-				return ret;
+				if (b.Set(name, expr)) {
+					ReturnValue ret = expr.Value(b);
+					return new ReturnValue(name + " = " + ret);
+				}
+				else {
+					return new ReturnValue(name + " = " + b.ValueFor(name));
+				}
 			}
-			return new ReturnValue(0.0);
+			return new ReturnValue(name + " = undefined");
 		}
 	}
 }

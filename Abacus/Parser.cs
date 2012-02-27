@@ -50,7 +50,7 @@ namespace Abacus
 		
 		public Expression parse_var() {
 			string name = "";
-			while (Char.IsLetterOrDigit(current())) {
+			while (Char.IsLetterOrDigit(current()) || current() == '.') {
 				name+=current();
 				nextchar();
 			}
@@ -62,8 +62,13 @@ namespace Abacus
 			skipws();
 			if (current() == '=') {
 				match('=');
-				Expression expr = parse_expression();
-				return new AssignmentExpression(name.Name, expr);
+				try {
+					Expression expr = parse_expression();
+					return new AssignmentExpression(name.Name, expr);
+				}
+				catch (ParserException /* unused */) {
+					return new AssignmentExpression(name.Name, null);
+				}
 			}
 			return null;
 		}
@@ -123,7 +128,11 @@ namespace Abacus
 				match('-');
 			}
 			
-			while (Char.IsDigit(current())) {
+			while (Char.IsDigit(current()) || current() == '_') {
+				if (current() == '_') {
+					nextchar();
+					continue;
+				}
 				number += current();
 				nextchar();
 			}
