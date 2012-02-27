@@ -21,30 +21,46 @@ namespace Abacus
 	public class ReturnValue
 	{
 		private bool defined;
+		private bool isstring;
 		private double val;
+		private string sval;
 		
 		public ReturnValue ()
 		{
 			defined = false;
+			isstring=false;
 		}
 		
 		public ReturnValue(double val)
 		{
 			defined = true;
+			isstring=false;
 			this.val = val;
+		}
+		
+		public ReturnValue(string val)
+		{
+			defined = true;
+			isstring=true;
+			this.sval = val;
 		}
 		
 		public bool Defined() {
 			return defined;
 		}
-		
+		public bool IsString() {
+			return isstring;
+		}
 		public double Value() {
 			return val;
 		}
 		
 		public override string ToString() {
-			if (Defined()) {
+			if (Defined() && !IsString()) {
 				return String.Format(CultureInfo.GetCultureInfo("en-US"), "{0}", val);
+			}
+			else if (IsString()) {
+				return sval;
 			}
 			return "undefined";
 		}
