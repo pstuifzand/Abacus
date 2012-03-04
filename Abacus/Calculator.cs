@@ -18,18 +18,18 @@ using System;
 
 namespace Abacus
 {
-	public class Calculator
-	{
-		Binding binding;
+    public class Calculator
+    {
+        Binding binding;
 
-		public Calculator(Binding b)
-		{
-			this.binding = b;
-		}
+        public Calculator(Binding b)
+        {
+            this.binding = b;
+        }
 
-
-		public ReturnValue calculate(Expression expr) {
-			return expr.Value(binding);
-		}
-	}
+        public ReturnValue calculate(Expression expr)
+        {
+            return expr.Value(binding);
+        }
+    }
 }

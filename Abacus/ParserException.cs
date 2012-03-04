@@ -14,18 +14,23 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 using System;
 
 namespace Abacus
 {
-	
-	
-	public class ParserException : Exception
-	{
-    	public ParserException() : base() {}
-   		public ParserException(string message) : base(message) {}
-    	public ParserException(string message, System.Exception inner) : base(message, inner) {}
+    public class ParserException : Exception
+    {
+        public ParserException() : base()
+        {
+        }
 
-	}
+        public ParserException(string message) : base(message)
+        {
+        }
+
+        public ParserException(string message, System.Exception inner) : base(message, inner)
+        {
+        }
+
+    }
 }

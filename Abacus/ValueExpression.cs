@@ -14,27 +14,29 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 using System;
 using System.Globalization;
 
 namespace Abacus
 {
-	public class ValueExpression : Expression {
-		
-		private double val;
-		
-		public ValueExpression(double val)
-		{
-			this.val = val;
-		}
-		
-		public override ReturnValue Value(Binding b) {
-			return new ReturnValue(val);
-		}
-		
-		public override string ToString() {
-			return val.ToString(CultureInfo.GetCultureInfo("en-US"));
-		}
-	}
+    public class ValueExpression : Expression
+    {
+
+        private double val;
+     
+        public ValueExpression(double val)
+        {
+            this.val = val;
+        }
+     
+        public override ReturnValue Value(Binding b)
+        {
+            return new ReturnValue(val);
+        }
+     
+        public override string ToString()
+        {
+            return val.ToString(CultureInfo.GetCultureInfo("en-US"));
+        }
+    }
 }

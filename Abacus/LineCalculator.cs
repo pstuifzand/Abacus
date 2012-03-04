@@ -19,40 +19,39 @@ using System.Collections.Generic;
 
 namespace Abacus
 {
+    public class LineCalculator
+    {
+        private Binding binding = new Binding();
 
+        public LineCalculator()
+        {
+            binding.Set("π", new ValueExpression(Math.PI), true);
+            binding.Set("PI", new ValueExpression(Math.PI), true);
+            binding.Set("e", new ValueExpression(Math.E), true);
+        }
 
-	public class LineCalculator
-	{
-		private Binding binding = new Binding();
+        public ICollection<string> CalculateLines(ICollection<string> lines)
+        {
+            Calculator calc = new Calculator(binding);
 
-		public LineCalculator ()
-		{
-			binding.Set("π", new ValueExpression(Math.PI), true);
-			binding.Set("PI", new ValueExpression(Math.PI), true);
-			binding.Set("e", new ValueExpression(Math.E), true);
-		}
+            List<string > list = new List<string>();
 
-		public ICollection<string> CalculateLines(ICollection<string> lines) {
-			Calculator calc = new Calculator(binding);
-
-			List<string> list = new List<string>();
-
-			foreach (string line in lines) {
-				int len;
-				for (len = line.Length; len >= 1; len--) {
-					string s = line.Substring(0, len);
-					try {
-						Expression expr = Expression.parse(s);
-						list.Add(calc.calculate(expr).ToString() + line.Substring(len));
-						break;
-					}
-					catch (ParserException /* unused */) {}
-				}
-				if (len == 0) {
-					list.Add(line);
-				}
-			}
-			return list;
-		}
-	}
+            foreach (string line in lines) {
+                int len;
+                for (len = line.Length; len >= 1; len--) {
+                    string s = line.Substring(0, len);
+                    try {
+                        Expression expr = Expression.parse(s);
+                        list.Add(calc.calculate(expr).ToString() + line.Substring(len));
+                        break;
+                    } catch (ParserException /* unused */) {
+                    }
+                }
+                if (len == 0) {
+                    list.Add(line);
+                }
+            }
+            return list;
+        }
+    }
 }

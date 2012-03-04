@@ -18,25 +18,25 @@ using System.Collections.Generic;
 
 namespace Abacus
 {
-	public class VariableExpression : Expression
-	{
-		private string name;
-		
-		public VariableExpression (string name)
-		{
-			this.name=name;
-		}
-		
-		public override ReturnValue Value(Binding b) {
-			try {
-				return b.ValueFor(name);
-			}
-			catch (KeyNotFoundException /* unused */) {
-				return new ReturnValue();
-			}
-		}
-		
-		public string Name { get { return name; } }
-	}
+    public class VariableExpression : Expression
+    {
+        private string name;
+     
+        public VariableExpression(string name)
+        {
+            this.name = name;
+        }
+     
+        public override ReturnValue Value(Binding b)
+        {
+            try {
+                return b.ValueFor(name);
+            } catch (KeyNotFoundException /* unused */) {
+                return new ReturnValue();
+            }
+        }
+     
+        public string Name { get { return name; } }
+    }
 }
 

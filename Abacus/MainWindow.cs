@@ -23,43 +23,44 @@ using Pango;
 using Abacus;
 
 public partial class MainWindow: Gtk.Window
-{	
-	public MainWindow (): base (Gtk.WindowType.Toplevel)
-	{
-		Build ();
-		textview1.GrabFocus();
-		
-		textview1.ModifyFont(FontDescription.FromString("Sans 14"));
-		textview2.ModifyFont(FontDescription.FromString("Sans 14"));
-	}
-	
-	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
-	{
-		Application.Quit ();
-		a.RetVal = true;
-	}
-	
-	protected virtual void OnTextview1KeyReleaseEvent (object o, Gtk.KeyReleaseEventArgs args)
-	{
-		switch(args.Event.Key) {
-		case Gdk.Key.Escape:
-			Gtk.Main.Quit();
-			break;
-		}
-		Recalculate();
-	}
-	
-	public void Recalculate() {
-		LineCalculator calc = new LineCalculator();
-		string [] lines = textview1.Buffer.Text.Split("\n".ToCharArray());
-		ICollection<string> col = calc.CalculateLines(Array.AsReadOnly(lines));
-		
-		string s = "";
-		
-		foreach (string line in col) {
-			s += line + "\n";
-		}
-		
-		textview2.Buffer.Text = s;
-	}
+{
+    public MainWindow(): base (Gtk.WindowType.Toplevel)
+    {
+        Build();
+        textview1.GrabFocus();
+
+        textview1.ModifyFont(FontDescription.FromString("Sans 14"));
+        textview2.ModifyFont(FontDescription.FromString("Sans 14"));
+    }
+
+    protected void OnDeleteEvent(object sender, DeleteEventArgs a)
+    {
+        Application.Quit();
+        a.RetVal = true;
+    }
+
+    protected virtual void OnTextview1KeyReleaseEvent(object o, Gtk.KeyReleaseEventArgs args)
+    {
+        switch (args.Event.Key) {
+        case Gdk.Key.Escape:
+            Gtk.Main.Quit();
+            break;
+        }
+        Recalculate();
+    }
+
+    public void Recalculate()
+    {
+        LineCalculator calc = new LineCalculator();
+        string [] lines = textview1.Buffer.Text.Split("\n".ToCharArray());
+        ICollection<string > col = calc.CalculateLines(Array.AsReadOnly(lines));
+
+        string s = "";
+     
+        foreach (string line in col) {
+            s += line + "\n";
+        }
+
+        textview2.Buffer.Text = s;
+    }
 }

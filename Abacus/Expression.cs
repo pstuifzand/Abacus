@@ -18,21 +18,23 @@ using System;
 
 namespace Abacus
 {
-	public abstract class Expression
-	{
-		public Expression()
-		{
-		}
-			
-		public static Expression parse(string s) {
-			Parser p = new Parser(s);
-			return p.parse();
-		}
-				
-		public override string ToString() {
-			return "";
-		}
-		
-		public abstract ReturnValue Value(Binding b);
-	}
+    public abstract class Expression
+    {
+        public Expression()
+        {
+        }
+
+        public static Expression parse(string s)
+        {
+            Parser p = new Parser(s);
+            return p.parse();
+        }
+             
+        public override string ToString()
+        {
+            return "";
+        }
+     
+        public abstract ReturnValue Value(Binding b);
+    }
 }

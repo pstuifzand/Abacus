@@ -20,18 +20,18 @@ using System.Diagnostics;
 
 namespace Abacus
 {
-	class MainClass
-	{
+    class MainClass
+    {
 
-		public static void Main (string[] args)
-		{
-			Application.Init ();
-			MainWindow win = new MainWindow ();
-			win.SetSizeRequest (600, 300);
-			win.WindowPosition = WindowPosition.CenterAlways;
-			win.Show ();
-			Application.Run ();
-		}
-		
-	}
+        public static void Main(string[] args)
+        {
+            Application.Init();
+            MainWindow win = new MainWindow();
+            win.SetSizeRequest(600, 300);
+            win.WindowPosition = WindowPosition.CenterAlways;
+            win.Show();
+            Application.Run();
+        }
+     
+    }
 }

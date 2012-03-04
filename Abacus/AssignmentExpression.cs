@@ -17,29 +17,29 @@ using System;
 
 namespace Abacus
 {
-	public class AssignmentExpression : Expression
-	{
-		private string name;
-		private Expression expr;
-		
-		public AssignmentExpression(string name, Expression expr)
-		{
-			this.name = name;
-			this.expr = expr;
-		}
-		
-		public override ReturnValue Value(Binding b) {
-			if (expr != null) {
-				if (b.Set(name, expr)) {
-					ReturnValue ret = expr.Value(b);
-					return new ReturnValue(name + " = " + ret);
-				}
-				else {
-					return new ReturnValue(name + " = " + b.ValueFor(name));
-				}
-			}
-			return new ReturnValue(name + " = undefined");
-		}
-	}
+    public class AssignmentExpression : Expression
+    {
+        private string name;
+        private Expression expr;
+     
+        public AssignmentExpression (string name, Expression expr)
+        {
+            this.name = name;
+            this.expr = expr;
+        }
+     
+        public override ReturnValue Value(Binding b)
+        {
+            if (expr != null) {
+                if (b.Set (name, expr)) {
+                    ReturnValue ret = expr.Value (b);
+                    return new ReturnValue (name + " = " + ret);
+                } else {
+                    return new ReturnValue (name + " = " + b.ValueFor (name));
+                }
+            }
+            return new ReturnValue (name + " = undefined");
+        }
+    }
 }
 

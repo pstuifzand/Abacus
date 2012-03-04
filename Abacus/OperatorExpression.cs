@@ -18,44 +18,38 @@ using System;
 
 namespace Abacus
 {
-	
-	
-	public class OperatorExpression : Expression
-	{
-		private Expression a,b;
-		private char op;
-		
-		public OperatorExpression(char op, Expression a, Expression b)
-		{
-			this.op = op;
-			this.a = a;
-			this.b = b;
-		}
-		
-		public override ReturnValue Value(Binding binding)
-		{
-			ReturnValue ra = a.Value(binding);
-			ReturnValue rb = b.Value(binding);
-			
-			if (!ra.Defined() || !rb.Defined()) {
-				return new ReturnValue();
-			}
-			
-			if (op == '+') {
-				return new ReturnValue(ra.Value() + rb.Value());
-			}
-			else if (op == '-') {
-				return new ReturnValue(ra.Value() - rb.Value());
-			}
-			else if (op == '*') {
-				return new ReturnValue(ra.Value() * rb.Value());
-			}
-			else if (op == '/') {
-				return new ReturnValue(ra.Value() / rb.Value());
-			}
-			else {
-				throw new ParserException("Unknown operator: " + op);
-			}
-		}
-	}
+    public class OperatorExpression : Expression
+    {
+        private Expression a, b;
+        private char op;
+     
+        public OperatorExpression(char op, Expression a, Expression b)
+        {
+            this.op = op;
+            this.a = a;
+            this.b = b;
+        }
+     
+        public override ReturnValue Value(Binding binding)
+        {
+            ReturnValue ra = a.Value(binding);
+            ReturnValue rb = b.Value(binding);
+         
+            if (!ra.Defined() || !rb.Defined()) {
+                return new ReturnValue();
+            }
+         
+            if (op == '+') {
+                return new ReturnValue(ra.Value() + rb.Value());
+            } else if (op == '-') {
+                return new ReturnValue(ra.Value() - rb.Value());
+            } else if (op == '*') {
+                return new ReturnValue(ra.Value() * rb.Value());
+            } else if (op == '/') {
+                return new ReturnValue(ra.Value() / rb.Value());
+            } else {
+                throw new ParserException("Unknown operator: " + op);
+            }
+        }
+    }
 }
