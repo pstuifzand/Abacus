@@ -13,46 +13,46 @@
 // 
 //     You should have received a copy of the GNU General Public License
 //     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 using System;
 using System.Collections.Generic;
 
 namespace Abacus
 {
-	public class Binding
-	{
-		private Dictionary<string, Expression> locals;
-		private Dictionary<string, ReturnValue> cache;
+    public class Binding
+    {
+        private Dictionary<string, Expression> locals;
+        private Dictionary<string, ReturnValue> cache;
+        private ISet<string> consts;
 
-		private ISet<string> consts;
+        public Binding ()
+        {
+            locals = new Dictionary<string, Expression> ();
+            cache = new Dictionary<string, ReturnValue> ();
 
-		public Binding ()
-		{
-			locals = new Dictionary<string, Expression>();
-			cache = new Dictionary<string, ReturnValue>();
+            consts = new SortedSet<string> ();
+        }
 
-			consts = new SortedSet<string>();
-		}
+        public bool Set (string name, Expression expr, bool is_const = false)
+        {
+            if (!consts.Contains (name)) {
+                locals [name] = expr;
+                if (is_const) {
+                    consts.Add (name);
+                    return true;
+                }
+                return true;
+            }
+            return false;
+        }
 
-		public bool Set(string name, Expression expr, bool is_const = false) {
-			if (!consts.Contains(name)) {
-				locals[name] = expr;
-				if (is_const) {
-					consts.Add(name);
-					return true;
-				}
-				return true;
-			}
-			return false;
-		}
-
-		public ReturnValue ValueFor(string name) {
-			if (!cache.ContainsKey(name)) {
-				cache[name] = new ReturnValue();
-				cache[name] = locals[name].Value(this);
-			}
-			return cache[name];
-		}
-	}
+        public ReturnValue ValueFor (string name)
+        {
+            if (!cache.ContainsKey (name)) {
+                cache [name] = new ReturnValue ();
+                cache [name] = locals [name].Value (this);
+            }
+            return cache [name];
+        }
+    }
 }
 
