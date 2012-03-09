@@ -1,2 +1,24 @@
-Abacus - A calculator that calculates while you type
+Abacus
+======
+
+A calculator that calculates while you type.
+
+Let's start with a few examples. Just type these in the running window.
+
+    1 + 1
+    x = 5
+    9 * x
+    
+    height = 10
+    width = 25
+    height * width
+
+    1 / x
+
+All these lines above will give you some kind of answer in the right 
+pane of the window. Try it and you will get the idea.
+
+If something doesn't work which you expected to, then leave an issue in the
+GitHub bug tracker.
+
 
